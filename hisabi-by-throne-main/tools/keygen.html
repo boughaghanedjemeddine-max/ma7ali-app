@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ma7aLi — مولّد مفاتيح الترخيص</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --card:      #161b22;
+      --border:    #30363d;
+      --primary:   #2f81f7;
+      --gold:      #d4a72c;
+      --success:   #3fb950;
+      --danger:    #f85149;
+      --text:      #f0f6fc;
+      --muted:     #8b949e;
+      --radius:    14px;
+      font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    /* ── Card ─────────────────────────────────────────────────────────────── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      box-shadow: 0 8px 48px rgba(0,0,0,.5);
+    }
+
+    /* ── Header ───────────────────────────────────────────────────────────── */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .header-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, #1a3e6a, var(--primary));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 4px 16px rgba(47,129,247,.3);
+    }
+    .header h1 { font-size: 20px; font-weight: 700; }
+    .header p  { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Form fields ──────────────────────────────────────────────────────── */
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    label  { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+
+    input, select {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 14px;
+      height: 44px;
+      padding: 0 14px;
+      width: 100%;
+      outline: none;
+      transition: border-color .2s;
+      font-family: inherit;
+    }
+    input:focus, select:focus { border-color: var(--primary); }
+    input[dir="ltr"] { text-align: left; font-family: 'Courier New', monospace; letter-spacing: .08em; }
+    select option { direction: rtl; }
+
+    /* ── Buttons ──────────────────────────────────────────────────────────── */
+    .btn {
+      height: 48px;
+      border-radius: 10px;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: opacity .15s, transform .1s;
+      font-family: inherit;
+    }
+    .btn:active { transform: scale(.98); }
+    .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+    .btn-primary {
+      background: linear-gradient(135deg, #1a5fa3, var(--primary));
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(47,129,247,.25);
+    }
+    .btn-primary:hover:not(:disabled) { opacity: .9; }
+    .btn-copy {
+      background: #21262d;
+      border: 1px solid var(--border);
+      color: var(--text);
+      height: 36px;
+      font-size: 13px;
+      padding: 0 14px;
+      border-radius: 8px;
+    }
+    .btn-copy.copied { border-color: var(--success); color: var(--success); }
+
+    /* ── Result Card ──────────────────────────────────────────────────────── */
+    .result {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .result-key {
+      font-family: 'Courier New', monospace;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: .12em;
+      word-break: break-all;
+      line-height: 1.6;
+      direction: ltr;
+      text-align: center;
+    }
+    .result-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .badge {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .badge-tier-basic { background: rgba(47,129,247,.15); color: var(--primary); border: 1px solid rgba(47,129,247,.3); }
+    .badge-tier-pro   { background: rgba(212,167,44,.15); color: var(--gold);    border: 1px solid rgba(212,167,44,.3); }
+    .badge-device     { background: rgba(139,148,158,.1); color: var(--muted);   border: 1px solid var(--border); font-family: monospace; }
+
+    /* ── History ──────────────────────────────────────────────────────────── */
+    .history-wrap { display: flex; flex-direction: column; gap: 8px; }
+    .history-title { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; display: flex; justify-content: space-between; align-items: center; }
+    .history-list  { display: flex; flex-direction: column; gap: 6px; max-height: 220px; overflow-y: auto; padding-right: 2px; }
+    .history-item  {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .history-item .key-text { font-family: monospace; color: var(--gold); font-size: 13px; direction: ltr; }
+    .history-item .meta-text { color: var(--muted); font-size: 11px; flex-shrink: 0; }
+    .btn-clear { font-size: 12px; color: var(--danger); background: none; border: none; cursor: pointer; padding: 0; font-family: inherit; }
+    .btn-clear:hover { text-decoration: underline; }
+
+    /* ── Error ────────────────────────────────────────────────────────────── */
+    .error-msg {
+      color: var(--danger);
+      font-size: 13px;
+      background: rgba(248,81,73,.1);
+      border: 1px solid rgba(248,81,73,.25);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: none;
+    }
+    .error-msg.visible { display: block; }
+
+    /* ── Divider ──────────────────────────────────────────────────────────── */
+    hr { border: none; border-top: 1px solid var(--border); }
+
+    /* ── Warning banner ───────────────────────────────────────────────────── */
+    .warn {
+      background: rgba(212,167,44,.08);
+      border: 1px solid rgba(212,167,44,.25);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .warn strong { color: var(--gold); }
+
+    /* ── Scrollbar ────────────────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- ── Header ── -->
+  <div class="header">
+    <div class="header-icon">🔑</div>
+    <div>
+      <h1>مولّد مفاتيح Ma7aLi</h1>
+      <p>أنشئ مفاتيح ترخيص مرتبطة بجهاز المستخدم</p>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- ── Device ID input ── -->
+  <div class="field">
+    <label>معرّف الجهاز (من شاشة التفعيل)</label>
+    <input
+      type="text"
+      id="deviceId"
+      dir="ltr"
+      placeholder="MA7A-XXXX-XXXX-XXXX"
+      maxlength="24"
+      autocomplete="off"
+      spellcheck="false"
+      inputmode="text"
+    />
+  </div>
+
+  <!-- ── Tier selector ── -->
+  <div class="field">
+    <label>نوع الترخيص</label>
+    <select id="tier">
+      <option value="basic">أساسي (Basic)</option>
+      <option value="pro">احترافي (Pro)</option>
+    </select>
+  </div>
+
+  <!-- ── Error ── -->
+  <div class="error-msg" id="errorMsg"></div>
+
+  <!-- ── Generate button ── -->
+  <button class="btn btn-primary" id="generateBtn" onclick="handleGenerate()">
+    ⚡ توليد المفتاح
+  </button>
+
+  <!-- ── Result ── -->
+  <div class="result" id="result" style="display:none">
+    <div style="font-size:13px; color:var(--muted); font-weight:600; margin-bottom:2px;">المفتاح المُوَلَّد:</div>
+    <div class="result-key" id="resultKey">—</div>
+    <div class="result-meta" id="resultMeta"></div>
+    <div style="display:flex; justify-content:flex-end;">
+      <button class="btn btn-copy" id="copyBtn" onclick="handleCopy()">📋 نسخ المفتاح</button>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- ── History ── -->
+  <div class="history-wrap" id="historyWrap" style="display:none">
+    <div class="history-title">
+      <span>المفاتيح المُولَّدة مؤخراً</span>
+      <button class="btn-clear" onclick="clearHistory()">مسح الكل</button>
+    </div>
+    <div class="history-list" id="historyList"></div>
+  </div>
+
+  <!-- ── Warning ── -->
+  <div class="warn">
+    <strong>⚠️ تحذير:</strong>
+    هذا الملف يحتوي على المفتاح السري للتطبيق.
+    احتفظ به في مكان آمن ولا تشاركه مع أحد.
+    كل مفتاح ترخيص مرتبط بجهاز واحد فقط (معرّف الجهاز الفعلي، وليس IP الشبكة).
+  </div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════
+// IMPORTANT: Keep in sync with src/lib/licenseManager.ts
+// ═══════════════════════════════════════════════════════════════════════════
+
+// ── Secret (must match licenseManager.ts APP_SECRET) ─────────────────────
+const _s1 = 'MA7a'; const _s2 = 'LiTH'; const _s3 = 'r0Ne';
+const _s4 = 'K3Y!'; const _s5 = 'b4Se'; const _s6 = '2025';
+const APP_SECRET = _s1 + _s2 + _s3 + _s4 + _s5 + _s6;
+
+// ── Base32 alphabet (must match ALPHABET in licenseManager.ts) ─────────────
+const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+// ── HMAC-SHA256 ───────────────────────────────────────────────────────────
+async function hmacSha256(secret, message) {
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    'raw', enc.encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false, ['sign']
+  );
+  const sig = await crypto.subtle.sign('HMAC', key, enc.encode(message));
+  return new Uint8Array(sig);
+}
+
+// ── Encode 12 bytes → 20 base32 chars (streaming, no BigInt) ─────────────
+function encodeKey(bytes) {
+  const chars = [];
+  let buffer = 0;
+  let bitsInBuffer = 0;
+  for (const byte of bytes) {
+    buffer = ((buffer << 8) | byte) & 0xFFFF;
+    bitsInBuffer += 8;
+    while (bitsInBuffer >= 5) {
+      bitsInBuffer -= 5;
+      chars.push(ALPHABET[(buffer >> bitsInBuffer) & 0x1F]);
+    }
+  }
+  if (bitsInBuffer > 0) {
+    chars.push(ALPHABET[(buffer << (5 - bitsInBuffer)) & 0x1F]);
+  }
+  return chars.join('');
+}
+
+// ── Format MA7A-XXXXX-XXXXX-XXXXX-XXXXX ───────────────────────────────────
+function formatKey(raw20) {
+  const u = raw20.toUpperCase();
+  return `MA7A-${u.slice(0,5)}-${u.slice(5,10)}-${u.slice(10,15)}-${u.slice(15,20)}`;
+}
+
+// ── Device ID → fingerprint (must match normaliseFingerprint in licenseManager.ts) ──
+// Strips "MA7A" prefix and dashes → first 12 hex chars → pad to 32 with '0'
+function expandDeviceId(shortId) {
+  const stripped = shortId
+    .toUpperCase()
+    .replace(/[\s\-]/g, '')
+    .replace(/^MA7A/, '');
+  return stripped.toLowerCase().slice(0, 12).padEnd(32, '0');
+}
+
+// ── Generate key ──────────────────────────────────────────────────────────
+async function generateKey(deviceFingerprint, tier) {
+  const serial = [
+    Math.floor(Math.random() * 256),
+    Math.floor(Math.random() * 256),
+    Math.floor(Math.random() * 256),
+  ];
+
+  const payload = new Uint8Array([
+    0x01,                         // version
+    tier === 'pro' ? 0x02 : 0x01, // tier
+    ...serial,
+  ]);
+
+  const hmacInput =
+    deviceFingerprint.toLowerCase() +
+    Array.from(payload).map(b => b.toString(16).padStart(2, '0')).join('');
+
+  const authTag = await hmacSha256(APP_SECRET, hmacInput);
+
+  const keyBytes = new Uint8Array(12);
+  keyBytes.set(payload);
+  keyBytes.set(authTag.slice(0, 7), 5);
+
+  return formatKey(encodeKey(keyBytes));
+}
+
+// ── Validate Device ID: MA7A-XXXX-XXXX-XXXX ─────────────────────────────
+function validateDeviceId(id) {
+  const cleaned = id.trim().toUpperCase().replace(/[\s\-]/g, '').replace(/^MA7A/, '');
+  return /^[0-9A-F]{12}$/.test(cleaned);
+}
+
+// ── History (sessionStorage) ──────────────────────────────────────────────
+function loadHistory() {
+  try { return JSON.parse(sessionStorage.getItem('keygen_history') || '[]'); }
+  catch { return []; }
+}
+function saveHistory(history) {
+  sessionStorage.setItem('keygen_history', JSON.stringify(history));
+}
+function addToHistory(entry) {
+  const history = loadHistory();
+  history.unshift(entry); // newest first
+  if (history.length > 20) history.pop();
+  saveHistory(history);
+  renderHistory();
+}
+function clearHistory() {
+  sessionStorage.removeItem('keygen_history');
+  renderHistory();
+}
+function renderHistory() {
+  const history = loadHistory();
+  const wrap = document.getElementById('historyWrap');
+  const list = document.getElementById('historyList');
+  if (!history.length) { wrap.style.display = 'none'; return; }
+  wrap.style.display = 'flex';
+  list.innerHTML = history.map(h => `
+    <div class="history-item">
+      <div>
+        <div class="key-text">${h.key}</div>
+        <div class="meta-text">الجهاز: ${h.deviceId} • ${h.tier === 'pro' ? 'احترافي' : 'أساسي'}</div>
+      </div>
+      <button class="btn-copy" onclick="copyText('${h.key}', this)" style="font-size:11px;padding:0 10px;height:28px">نسخ</button>
+    </div>
+  `).join('');
+}
+
+// ── Copy to clipboard ─────────────────────────────────────────────────────
+async function copyText(text, btn) {
+  try {
+    await navigator.clipboard.writeText(text);
+    if (btn) {
+      const orig = btn.textContent;
+      btn.textContent = '✓ تم';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+    }
+  } catch { alert('لم يمكن النسخ التلقائي.\n\nالمفتاح: ' + text); }
+}
+
+function handleCopy() {
+  const key = document.getElementById('resultKey').textContent;
+  copyText(key, document.getElementById('copyBtn'));
+}
+
+// ── Main handler ──────────────────────────────────────────────────────────
+async function handleGenerate() {
+  const btn      = document.getElementById('generateBtn');
+  const errorEl  = document.getElementById('errorMsg');
+  const resultEl = document.getElementById('result');
+  const keyEl    = document.getElementById('resultKey');
+  const metaEl   = document.getElementById('resultMeta');
+
+  const rawDeviceId = document.getElementById('deviceId').value.trim();
+  const tier        = document.getElementById('tier').value;
+
+  // Hide previous error/result
+  errorEl.classList.remove('visible');
+  resultEl.style.display = 'none';
+
+  // Validate Device ID
+  if (!rawDeviceId) {
+    errorEl.textContent = 'الرجاء إدخال معرّف الجهاز (MA7A-XXXX-XXXX-XXXX).';
+    errorEl.classList.add('visible'); return;
+  }
+  if (!validateDeviceId(rawDeviceId)) {
+    errorEl.textContent = 'معرّف الجهاز غير صحيح. مثال: MA7A-1A2B-3C4D-5E6F';
+    errorEl.classList.add('visible'); return;
+  }
+
+  // Expand Device ID → 32-char fingerprint (same as app's normaliseFingerprint)
+  const deviceFingerprint = expandDeviceId(rawDeviceId);
+
+  btn.disabled = true;
+  btn.textContent = '⏳ جاري التوليد…';
+
+  try {
+    const key = await generateKey(deviceFingerprint, tier);
+
+    keyEl.textContent = key;
+
+    const displayId = rawDeviceId.toUpperCase();
+    metaEl.innerHTML = `
+      <span class="badge badge-tier-${tier}">${tier === 'pro' ? '⭐ احترافي' : '✓ أساسي'}</span>
+      <span class="badge badge-device">الجهاز: ${displayId}</span>
+    `;
+
+    resultEl.style.display = 'flex';
+
+    // Save to session history
+    addToHistory({ key, deviceId: displayId, tier, generatedAt: new Date().toLocaleString('ar') });
+
+  } catch (err) {
+    errorEl.textContent = 'حدث خطأ أثناء التوليد: ' + err.message;
+    errorEl.classList.add('visible');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '⚡ توليد المفتاح';
+  }
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+renderHistory();
+
+// Allow Enter to generate
+document.getElementById('deviceId').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') handleGenerate();
+});
+
+// Convert to uppercase on input (no reformatting — paste as-is)
+document.getElementById('deviceId').addEventListener('input', function() {
+  const pos = this.selectionStart;
+  this.value = this.value.toUpperCase();
+  this.setSelectionRange(pos, pos);
+});
+</script>
+
+</body>
+</html>

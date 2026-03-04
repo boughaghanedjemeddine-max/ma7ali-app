@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content" />
+    <!-- PWA / theme -->
+    <meta name="theme-color" content="#0f1419" />
+    <meta name="application-name" content="محلي" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- iOS PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="محلي" />
+
+    <!-- SEO -->
+    <meta name="description" content="Ma7ali - محلي | إدارة ذكية لتجارتك. تطبيق متكامل لإدارة المبيعات والمخزون والأرباح للتجار" />
+    <meta name="keywords" content="إدارة المتجر, محاسبة, مبيعات, مخزون, أرباح, تجارة, Ma7ali, محلي, THRONE" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ma7ali - محلي | إدارة ذكية لتجارتك" />
+    <meta property="og:description" content="تطبيق متكامل لإدارة المبيعات والمخزون والأرباح للتجار" />
+    <meta property="og:image" content="/icons/icon-512x512.png" />
+
+    <title>Ma7ali - محلي | THRONE</title>
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512x512.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="128x128" href="/icons/icon-128x128.png" />
+
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // One-time cleanup of zombie service workers from broken builds.
+      // After cleanup, the new VitePWA service worker takes over normally.
+      (function() {
+        var CLEANUP_KEY = 'sw_cleanup_v2';
+        if (localStorage.getItem(CLEANUP_KEY)) return; // already done
+
+        var p1 = Promise.resolve();
+        var p2 = Promise.resolve();
+
+        if ('serviceWorker' in navigator) {
+          p1 = navigator.serviceWorker.getRegistrations().then(function(regs) {
+            return Promise.all(regs.map(function(r) {
+              console.log('[Cleanup] Unregistering old SW:', r.scope);
+              return r.unregister();
+            }));
+          });
+        }
+
+        if ('caches' in window) {
+          p2 = caches.keys().then(function(names) {
+            return Promise.all(names.map(function(n) {
+              console.log('[Cleanup] Deleting cache:', n);
+              return caches.delete(n);
+            }));
+          });
+        }
+
+        Promise.all([p1, p2]).then(function() {
+          localStorage.setItem(CLEANUP_KEY, Date.now().toString());
+          console.log('[Cleanup] Done — fresh start');
+        });
+      })();
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

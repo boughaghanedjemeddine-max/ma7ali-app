@@ -1,0 +1,659 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* THRONE Brand Colors - Premium Dark Theme */
+    --background: 220 25% 5%;
+    --foreground: 45 20% 96%;
+
+    --card: 220 22% 8%;
+    --card-foreground: 45 20% 96%;
+
+    --popover: 220 22% 10%;
+    --popover-foreground: 45 20% 96%;
+
+    /* Blue Metallic - Primary Authority */
+    --primary: 210 65% 32%;
+    --primary-foreground: 45 20% 98%;
+    --primary-glow: 210 70% 48%;
+
+    /* Secondary - Deep Blue */
+    --secondary: 215 50% 12%;
+    --secondary-foreground: 45 20% 96%;
+
+    /* Soft Gold - Premium Accent */
+    --accent: 42 75% 55%;
+    --accent-foreground: 220 25% 8%;
+    --gold: 42 75% 55%;
+    --gold-glow: 45 85% 65%;
+
+    /* Brown - Warm Authority */
+    --brown: 25 35% 22%;
+    --brown-foreground: 45 20% 96%;
+    --brown-warm: 30 40% 28%;
+
+    --muted: 220 20% 14%;
+    --muted-foreground: 220 15% 55%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 145 65% 42%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 220 25% 8%;
+
+    --border: 220 20% 16%;
+    --input: 220 20% 14%;
+    --ring: 210 65% 40%;
+
+    --radius: 1rem;
+
+    /* Premium Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(210 65% 28%), hsl(210 70% 42%));
+    --gradient-gold: linear-gradient(135deg, hsl(42 75% 50%), hsl(45 85% 62%));
+    --gradient-card: linear-gradient(165deg, hsl(220 22% 10%), hsl(220 22% 6%));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(210 50% 12%) 0%, hsl(220 25% 5%) 70%);
+    --gradient-throne: linear-gradient(180deg, hsl(210 65% 8%) 0%, hsl(220 25% 4%) 100%);
+    --gradient-gold-shine: linear-gradient(90deg, transparent, hsl(42 75% 55% / 0.4), transparent);
+
+    /* Premium Shadows */
+    --shadow-sm: 0 2px 8px hsl(220 60% 4% / 0.5);
+    --shadow-md: 0 4px 20px hsl(220 60% 4% / 0.6);
+    --shadow-lg: 0 8px 40px hsl(220 60% 4% / 0.7);
+    --shadow-gold: 0 4px 24px hsl(42 75% 55% / 0.25);
+    --shadow-gold-glow: 0 0 30px hsl(42 75% 55% / 0.3);
+    --shadow-primary: 0 4px 24px hsl(210 65% 40% / 0.25);
+    --shadow-primary-glow: 0 0 30px hsl(210 65% 40% / 0.2);
+
+    /* Sidebar */
+    --sidebar-background: 220 22% 6%;
+    --sidebar-foreground: 45 20% 96%;
+    --sidebar-primary: 210 65% 35%;
+    --sidebar-primary-foreground: 45 20% 98%;
+    --sidebar-accent: 220 20% 12%;
+    --sidebar-accent-foreground: 45 20% 96%;
+    --sidebar-border: 220 20% 14%;
+    --sidebar-ring: 210 65% 40%;
+  }
+
+  .light {
+    /* ── Surfaces ── */
+    --background: 214 30% 94%;
+    --foreground: 220 35% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 35% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 35% 10%;
+
+    /* ── Primary (deep blue) ── */
+    --primary: 210 65% 34%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 210 65% 50%;
+
+    /* ── Secondary ── */
+    --secondary: 214 25% 88%;
+    --secondary-foreground: 220 30% 18%;
+
+    /* ── Gold accent ── */
+    --accent: 42 78% 46%;
+    --accent-foreground: 220 30% 8%;
+    --gold: 42 78% 46%;
+    --gold-glow: 45 82% 56%;
+
+    /* ── Brown ── */
+    --brown: 25 35% 28%;
+    --brown-foreground: 45 20% 96%;
+    --brown-warm: 30 40% 34%;
+
+    /* ── Muted ── */
+    --muted: 214 22% 88%;
+    --muted-foreground: 220 15% 40%;
+
+    /* ── Status ── */
+    --destructive: 0 70% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 145 58% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 90% 46%;
+    --warning-foreground: 220 30% 8%;
+
+    /* ── Borders & Inputs ── */
+    --border: 214 22% 78%;
+    --input: 0 0% 100%;
+    --ring: 210 65% 42%;
+
+    /* ── Light-mode Gradients ── */
+    --gradient-primary: linear-gradient(135deg, hsl(210 65% 30%), hsl(210 65% 46%));
+    --gradient-gold: linear-gradient(135deg, hsl(42 78% 42%), hsl(45 82% 54%));
+    --gradient-card: linear-gradient(160deg, hsl(0 0% 100%) 0%, hsl(214 28% 97%) 100%);
+    --gradient-hero: radial-gradient(ellipse at top, hsl(210 40% 90%) 0%, hsl(214 30% 94%) 70%);
+    --gradient-throne: linear-gradient(180deg, hsl(214 32% 90%) 0%, hsl(214 28% 95%) 100%);
+    --gradient-gold-shine: linear-gradient(90deg, transparent, hsl(42 78% 46% / 0.25), transparent);
+
+    /* ── Shadows (light & crisp) ── */
+    --shadow-sm: 0 1px 4px hsl(220 30% 40% / 0.08);
+    --shadow-md: 0 4px 16px hsl(220 30% 40% / 0.10);
+    --shadow-lg: 0 8px 32px hsl(220 30% 40% / 0.14);
+    --shadow-gold: 0 4px 16px hsl(42 78% 46% / 0.22);
+    --shadow-gold-glow: 0 0 24px hsl(42 78% 46% / 0.28);
+    --shadow-primary: 0 4px 16px hsl(210 65% 34% / 0.18);
+    --shadow-primary-glow: 0 0 24px hsl(210 65% 34% / 0.22);
+
+    /* ── Sidebar ── */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 35% 10%;
+    --sidebar-primary: 210 65% 34%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 214 25% 92%;
+    --sidebar-accent-foreground: 220 30% 14%;
+    --sidebar-border: 214 22% 82%;
+    --sidebar-ring: 210 65% 42%;
+  }
+
+  /* ── Light-mode component overrides ── */
+  .light body {
+    background-image: var(--gradient-throne);
+  }
+
+  .light .throne-card {
+    background: var(--gradient-card);
+    border-color: hsl(var(--border) / 0.7);
+    box-shadow: var(--shadow-md);
+  }
+
+  .light .throne-card::before {
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.15), transparent);
+  }
+
+  .light .glass-card {
+    background: hsl(var(--card) / 0.95);
+    border-color: hsl(var(--border) / 0.6);
+    box-shadow: var(--shadow-md);
+  }
+
+  .light .action-card {
+    background: var(--gradient-card);
+    border-color: hsl(var(--border) / 0.6);
+  }
+
+  .light .action-card:hover {
+    border-color: hsl(var(--primary) / 0.35);
+    box-shadow: var(--shadow-primary);
+  }
+
+  .light .gold-text {
+    background-image: linear-gradient(135deg, hsl(42 78% 38%), hsl(45 82% 50%));
+  }
+
+  .light .metallic-text {
+    background-image: linear-gradient(135deg, hsl(210 65% 30%), hsl(210 65% 46%));
+  }
+
+  .light .profit-number {
+    text-shadow: 0 2px 12px hsl(42 78% 46% / 0.20);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: 'Tajawal', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background-image: var(--gradient-throne);
+    min-height: 100vh;
+    min-height: 100dvh;
+    overscroll-behavior: none;
+  }
+
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Safe area for bottom nav */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+@layer components {
+  /* Premium Glass Card */
+  .glass-card {
+    @apply bg-card/90 backdrop-blur-xl border border-border/40 rounded-2xl;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* THRONE Card - Premium elevated card */
+  .throne-card {
+    @apply relative overflow-hidden rounded-2xl border border-border/30;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-md);
+  }
+
+  .throne-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--accent) / 0.3), transparent);
+  }
+
+  /* Gold Text Gradient */
+  .gold-text {
+    @apply bg-clip-text text-transparent font-bold;
+    background-image: linear-gradient(135deg, hsl(42 75% 55%), hsl(45 85% 68%));
+  }
+
+  /* Metallic Text Gradient */
+  .metallic-text {
+    @apply bg-clip-text text-transparent font-semibold;
+    background-image: linear-gradient(135deg, hsl(210 65% 45%), hsl(210 70% 60%));
+  }
+
+  /* Gold Button */
+  .btn-gold {
+    @apply font-bold tracking-wide;
+    background: var(--gradient-gold);
+    color: hsl(var(--accent-foreground));
+    box-shadow: var(--shadow-gold);
+  }
+
+  .btn-gold:hover {
+    box-shadow: var(--shadow-gold-glow);
+  }
+
+  /* Primary Glow Button */
+  .btn-primary-glow {
+    background: var(--gradient-primary);
+    color: hsl(var(--primary-foreground));
+    box-shadow: var(--shadow-primary);
+  }
+
+  .btn-primary-glow:hover {
+    box-shadow: var(--shadow-primary-glow);
+  }
+
+  /* Stat Card with hover effect */
+  .stat-card {
+    @apply throne-card p-4 transition-all duration-300;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .stat-card:active {
+    transform: scale(0.98);
+  }
+
+  /* Profit Number - Large Gold Display */
+  .profit-number {
+    @apply gold-text text-4xl font-extrabold tracking-tight;
+    text-shadow: 0 2px 20px hsl(42 75% 55% / 0.3);
+  }
+
+  /* Quick Action Cards */
+  .action-card {
+    @apply relative flex flex-col items-center gap-2 rounded-2xl border p-4;
+    @apply transition-all duration-300 ease-out;
+    background: var(--gradient-card);
+    border-color: hsl(var(--border) / 0.5);
+  }
+
+  .action-card:hover {
+    transform: translateY(-2px);
+    border-color: hsl(var(--accent) / 0.3);
+  }
+
+  .action-card:active {
+    transform: scale(0.96);
+  }
+
+  /* Alert Badge */
+  .alert-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold;
+    @apply border backdrop-blur-sm;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 1rem);
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0.5rem);
+  }
+
+  /* Number styling - bolder */
+  .number-display {
+    @apply font-bold tabular-nums;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+  border-radius: 4px;
+}
+
+/* ========= THRONE Animations ========= */
+
+/* Gold shimmer effect */
+@keyframes shimmer-gold {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Pulse gold glow */
+@keyframes pulse-gold {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(42 75% 55% / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px hsl(42 75% 55% / 0.2);
+  }
+}
+
+/* Subtle float */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* THRONE reveal line animation */
+@keyframes throne-reveal {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* Fade up entrance */
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scale in entrance */
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Card slide entrance */
+@keyframes card-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Number counting tick */
+@keyframes number-tick {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Glow pulse for success */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(42 75% 55% / 0);
+  }
+  50% {
+    box-shadow: 0 0 16px 2px hsl(42 75% 55% / 0.3);
+  }
+}
+
+/* Button press effect */
+@keyframes btn-press {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.96);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Underline reveal for THRONE wordmark */
+@keyframes underline-reveal {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* Animation Classes */
+.animate-shimmer-gold {
+  background: linear-gradient(90deg, transparent, hsl(42 75% 55% / 0.25), transparent);
+  background-size: 200% 100%;
+  animation: shimmer-gold 2.5s ease-in-out infinite;
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 2.5s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3.5s ease-in-out infinite;
+}
+
+.animate-throne-reveal {
+  animation: throne-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-card-enter {
+  animation: card-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-number-tick {
+  animation: number-tick 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.animate-underline-reveal {
+  animation: underline-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+/* Stagger delays for sequential animations */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+
+/* ══════════════════════════════════════════════════════════════
+   PAGE TRANSITIONS — fast fade+slide for route changes
+   Targets every page's outermost div (min-h-screen bg-background)
+   so no per-page code changes are needed.
+══════════════════════════════════════════════════════════════ */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fired by React mounting the new page component */
+.min-h-screen {
+  animation: page-enter 0.15s cubic-bezier(0.16, 1, 0.3, 1) both;
+  /* will-change removed: applying it to every .min-h-screen wastes GPU layers */
+}
+
+/* Wrapper div has isolation:isolate — children animate normally */
+.page-enter > * {
+  animation: page-enter 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   VIEWPORT HEIGHT FIX — Android keyboard + safe area
+   Uses Visual Viewport API value set via JS as --app-height
+══════════════════════════════════════════════════════════════ */
+:root {
+  --app-height: 100dvh;
+}
+
+.full-h {
+  height: var(--app-height);
+  min-height: var(--app-height);
+}
+
+/* Make all min-h-screen respect visual viewport */
+.min-h-screen {
+  min-height: var(--app-height) !important;
+}
+
+/* Prevent content from going under keyboard on Android WebView */
+body {
+  height: var(--app-height);
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Smooth hardware-accelerated scrolling in list containers */
+main, .overflow-y-auto, .overflow-auto {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PERFORMANCE — Professional app feel
+══════════════════════════════════════════════════════════════ */
+
+/* Remove 300ms tap delay on ALL tappable elements — instant response */
+*, *::before, *::after {
+  touch-action: manipulation;
+}
+/* Restore pan for scroll containers */
+main, .overflow-y-auto, .overflow-auto, [data-radix-scroll-area-viewport] {
+  touch-action: pan-y;
+}
+
+/* CSS containment — browser skips layout/paint of off-screen cards */
+.throne-card,
+[class*="rounded-"][class*="bg-card"],
+[class*="rounded-"][class*="bg-muted"] {
+  contain: layout style;
+}
+
+/* Promote nav pill to its own GPU layer — never repaints */
+nav > div {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* content-visibility: auto — skip render of off-screen list rows */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 72px;
+}
+
+/* Active/pressed state feels instant — no delay */
+button, a, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+/* Smooth font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+}
