@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>محلي — Ma7ali | إدارة ذكية لتجارتك</title>
+  <meta name="description" content="تطبيق محلي Ma7ali — إدارة المبيعات والمخزون والأرباح للتجار الجزائريين. تطبيق Android احترافي من إنتاج THRONE." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#0a0e14;--bg2:#0f1520;--bg3:#141c28;--card:#141c28;
+      --border:rgba(255,255,255,0.07);--text:#e8eaf0;--muted:#7a8499;
+      --gold:#f59e0b;--gold2:#d97706;--blue:#3b82f6;--green:#22c55e;--red:#f43f5e;
+      --radius:16px;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Cairo','Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    .lang-ar .fr{display:none}
+    .lang-fr .ar{display:none}
+    .lang-fr{font-family:'Inter','Cairo',sans-serif;direction:ltr;text-align:left}
+    .lang-fr .container{direction:ltr}
+    .lang-fr .sh,.lang-fr .hero,.lang-fr .text-center{text-align:center}
+    .lang-fr .included-list li,.lang-fr .faq-a,.lang-fr td:first-child{direction:ltr;text-align:left}
+    .lang-fr nav .nav-inner{flex-direction:row}
+    .lang-fr .feature-card p,.lang-fr .step p{text-align:left}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+    .section{padding:100px 0}.section-sm{padding:60px 0}
+    .grad-text{background:linear-gradient(135deg,#f59e0b 0%,#fbbf24 40%,#f97316 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .grad-text-blue{background:linear-gradient(135deg,#60a5fa 0%,#a78bfa 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;border-radius:14px;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;border:none;transition:all .25s;white-space:nowrap}
+    .btn-gold{background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;box-shadow:0 0 30px rgba(245,158,11,.35)}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(245,158,11,.5)}
+    .btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,.15);color:var(--text)}
+    .btn-outline:hover{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.04)}
+    .btn-wa{background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;box-shadow:0 0 25px rgba(34,197,94,.3);font-size:18px;padding:16px 36px}
+    .btn-wa:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(34,197,94,.5)}
+    .btn-lang{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text);padding:8px 16px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
+    .btn-lang:hover{background:rgba(255,255,255,.12)}
+    .btn-lang.active{background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;border-color:transparent}
+    .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:999px;font-size:13px;font-weight:600}
+    .badge-gold{background:rgba(245,158,11,.15);color:var(--gold);border:1px solid rgba(245,158,11,.25)}
+    .badge-blue{background:rgba(59,130,246,.15);color:#60a5fa;border:1px solid rgba(59,130,246,.25)}
+    .badge-green{background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.25)}
+    .badge-purple{background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.25)}
+    .glow-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);margin-left:4px;vertical-align:middle}
+    .sh{text-align:center;margin-bottom:60px}
+    .sh h2{font-size:clamp(28px,4vw,42px);font-weight:900;line-height:1.2}
+    .sh p{font-size:16px;color:var(--muted);max-width:560px;margin:12px auto 0}
+    .sep{width:60px;height:3px;border-radius:2px;background:linear-gradient(90deg,#f59e0b,transparent);margin:16px auto 0}
+    .line-sep{height:1px;background:var(--border);width:100%}
+    nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,14,20,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 0}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{display:flex;align-items:center;gap:12px}
+    .logo-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#1e2d45,#2a3f5f);border:1px solid rgba(245,158,11,.3);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900}
+    .app-name{font-size:20px;font-weight:800;letter-spacing:-.3px}
+    .by-throne{font-size:11px;color:var(--muted);font-weight:500;display:block;margin-top:-3px}
+    .nav-right{display:flex;align-items:center;gap:10px}
+    .hero{padding-top:140px;padding-bottom:100px;position:relative;overflow:hidden;text-align:center}
+    .hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.08) 0%,transparent 70%);pointer-events:none}
+    .hero h1{font-size:clamp(38px,6vw,70px);font-weight:900;line-height:1.15;letter-spacing:-1px;margin-bottom:24px}
+    .hero p.hero-sub{font-size:clamp(15px,2.2vw,19px);color:var(--muted);max-width:620px;margin:0 auto 40px;line-height:1.8}
+    .hero-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+    .hero-stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;margin-top:80px;padding-top:48px;border-top:1px solid var(--border)}
+    .hero-stat .num{font-size:34px;font-weight:900;letter-spacing:-1px;line-height:1}
+    .hero-stat .lbl{font-size:13px;color:var(--muted);margin-top:4px}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+    .feature-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all .25s}
+    .feature-card:hover{border-color:rgba(245,158,11,.2);background:linear-gradient(135deg,#141c28,#1a2438);transform:translateY(-4px)}
+    .feature-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(245,158,11,.05));border:1px solid rgba(245,158,11,.2);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px}
+    .feature-card h3{font-size:17px;font-weight:700;margin-bottom:8px}
+    .feature-card p{font-size:14px;color:var(--muted);line-height:1.7}
+    .updates-section{background:linear-gradient(135deg,#0f1520,#141c28);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .updates-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:80px 0}
+    .updates-left .badge{margin-bottom:20px}
+    .updates-left h2{font-size:clamp(26px,3.5vw,40px);font-weight:900;line-height:1.25;margin-bottom:16px}
+    .updates-left p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:24px}
+    .update-list{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+    .update-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px}
+    .update-item .ui-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+    .update-item h4{font-size:14px;font-weight:700;margin-bottom:3px}
+    .update-item p{font-size:12px;color:var(--muted);line-height:1.5}
+    .roadmap-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;position:relative;overflow:hidden}
+    .roadmap-card::before{content:'';position:absolute;top:-60px;left:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,.1),transparent 70%)}
+    .roadmap-card h3{font-size:16px;font-weight:800;margin-bottom:20px}
+    .roadmap-item{display:flex;gap:14px;margin-bottom:16px;align-items:flex-start}
+    .roadmap-dot{flex-shrink:0;margin-top:5px}
+    .rdot{width:10px;height:10px;border-radius:50%;border:2px solid}
+    .rdot.done{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(34,197,94,.4)}
+    .rdot.soon{background:var(--gold);border-color:var(--gold);box-shadow:0 0 8px rgba(245,158,11,.4)}
+    .rdot.planned{background:transparent;border-color:var(--muted)}
+    .roadmap-text h4{font-size:13px;font-weight:700;margin-bottom:2px}
+    .roadmap-text p{font-size:11px;color:var(--muted)}
+    .rdot-legend{display:flex;gap:16px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
+    .rdot-legend span{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px}
+    .steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px}
+    .step{text-align:center;padding:32px 20px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+    .step-num{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-size:20px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+    .step h3{font-size:16px;font-weight:700;margin-bottom:8px}
+    .step p{font-size:13px;color:var(--muted);line-height:1.6}
+    .pricing-app{background:linear-gradient(135deg,#141c28,#1a2438);border:1px solid rgba(245,158,11,.3);border-radius:24px;padding:52px 40px;text-align:center;position:relative;overflow:hidden;max-width:700px;margin:0 auto 80px}
+    .pricing-app::before{content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.1),transparent 70%)}
+    .price-badge{display:inline-flex;align-items:baseline;gap:8px;font-size:64px;font-weight:900;letter-spacing:-2px;line-height:1;color:var(--gold);margin:16px 0}
+    .price-badge span{font-size:24px;font-weight:600;color:var(--muted)}
+    .pricing-app h2{font-size:28px;font-weight:800;margin-bottom:8px}
+    .pricing-app .sub{font-size:15px;color:var(--muted);margin-bottom:28px}
+    .included-list{text-align:right;display:inline-block;margin:0 auto 32px}
+    .included-list li{display:flex;align-items:center;gap:10px;font-size:15px;padding:6px 0;list-style:none}
+    .included-list .check{color:var(--green);font-size:17px}
+    .included-list .star{color:var(--gold);font-size:17px}
+    .after-note{margin-top:20px;padding:14px 20px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--border);font-size:13px;color:var(--muted);line-height:1.7}
+    .plans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:16px;margin-top:40px}
+    .plan-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px 20px;text-align:center;transition:all .25s;position:relative;overflow:hidden}
+    .plan-card:hover{transform:translateY(-4px);border-color:rgba(245,158,11,.3)}
+    .plan-card.highlight{border:2px solid var(--gold);background:linear-gradient(160deg,#1a2438,#141c28)}
+    .plan-card.highlight::before{content:'Meilleur';position:absolute;top:10px;left:10px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-size:10px;font-weight:800;padding:3px 8px;border-radius:999px}
+    .plan-card .plan-name{font-size:14px;font-weight:700;margin-bottom:12px;color:var(--muted)}
+    .plan-card .plan-price{font-size:28px;font-weight:900;letter-spacing:-1px;color:var(--text);line-height:1}
+    .plan-card .plan-dz{font-size:14px;font-weight:600;color:var(--muted)}
+    .plan-card .plan-note{font-size:12px;color:var(--muted);margin-top:8px}
+    .table-wrap{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+    .compare-table{width:100%;border-collapse:collapse}
+    .compare-table th,.compare-table td{padding:13px 18px;text-align:center;font-size:13px;border-bottom:1px solid var(--border)}
+    .compare-table th{font-size:15px;font-weight:800}
+    .compare-table td:first-child{text-align:right;color:var(--muted);font-size:13px}
+    .compare-table .col-free{color:var(--muted)}
+    .compare-table .col-pro{color:var(--gold);font-weight:700}
+    .compare-table .ic-no{color:#f43f5e;font-size:17px}
+    .compare-table .ic-yes{color:var(--green);font-size:17px}
+    .compare-table tr:hover td{background:rgba(255,255,255,.02)}
+    .compare-table thead th{background:var(--bg3);padding-top:18px;padding-bottom:18px}
+    .compare-table thead th.pro-col{background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(245,158,11,.05));color:var(--gold)}
+    .lang-fr .compare-table td:first-child{text-align:left}
+    .faq-list{max-width:760px;margin:40px auto 0}
+    .faq-item{background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:12px;overflow:hidden}
+    .faq-q{padding:18px 22px;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none}
+    .faq-q .arrow{transition:transform .25s;font-size:17px;color:var(--muted)}
+    .faq-item.open .faq-q .arrow{transform:rotate(180deg)}
+    .faq-a{padding:0 22px;max-height:0;overflow:hidden;font-size:14px;color:var(--muted);line-height:1.8;transition:max-height .35s ease,padding .35s}
+    .faq-item.open .faq-a{max-height:300px;padding:0 22px 18px}
+    .cta-section{text-align:center;padding:100px 20px;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;bottom:-150px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(34,197,94,.07),transparent 70%)}
+    .cta-section h2{font-size:clamp(26px,5vw,50px);font-weight:900;margin-bottom:16px}
+    .cta-section>div>p{font-size:17px;color:var(--muted);margin-bottom:40px}
+    footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0;text-align:center}
+    .footer-logo{font-size:22px;font-weight:900;margin-bottom:8px}
+    footer p{font-size:13px;color:var(--muted)}
+    footer .links{display:flex;justify-content:center;gap:24px;margin:16px 0;flex-wrap:wrap}
+    footer .links a{font-size:13px;color:var(--muted);transition:color .2s}
+    footer .links a:hover{color:var(--gold)}
+    @media(max-width:900px){.updates-inner{grid-template-columns:1fr}}
+    @media(max-width:768px){
+      .section{padding:72px 0}
+      .nav-right .btn-outline{display:none}
+      .hero{padding-top:110px}
+      .pricing-app{padding:36px 20px}
+      .price-badge{font-size:48px}
+      .hero-stats{gap:28px}
+      .compare-table th,.compare-table td{padding:10px 10px;font-size:12px}
+      
+    }
+    @media(max-width:480px){
+      .steps{grid-template-columns:1fr 1fr}
+      .plans-grid{grid-template-columns:1fr 1fr}
+      
+    }
+
+    /* ═══════════════ SCREENSHOTS SECTION ══════════════════════════════ */
+    .screenshots-section { padding: 80px 0 60px; background: var(--bg2); overflow: hidden; }
+    .screenshots-scroll {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 40px 40px 20px;
+    }
+    .ss-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .ss-phone {
+      width: 190px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,.12);
+      box-shadow: 0 24px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04);
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+    .ss-phone:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 36px 80px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.08);
+    }
+    .ss-phone img {
+      width: 100%;
+      display: block;
+    }
+    .ss-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-align: center;
+      letter-spacing: .3px;
+    }
+    @media(max-width:768px){
+      .screenshots-scroll { gap: 16px; padding: 30px 20px 10px; }
+      .ss-phone { width: 150px; border-radius: 22px; }
+    }
+    @media(max-width:480px){
+      .screenshots-scroll { gap: 12px; padding: 24px 12px 8px; }
+      .ss-phone { width: 130px; border-radius: 18px; }
+      .ss-label { font-size: 11px; }
+    }
+
+  </style>
+</head>
+<body class="lang-ar">
+
+<nav>
+  <div class="container nav-inner">
+    <div class="nav-logo">
+      <div class="logo-mark grad-text">م</div>
+      <div>
+        <span class="app-name grad-text">محلي · Ma7ali</span>
+        <span class="by-throne">by THRONE</span>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="btn-lang active" id="btn-ar" onclick="setLang('ar')">العربية</button>
+      <button class="btn-lang" id="btn-fr" onclick="setLang('fr')">Français</button>
+      <a href="#pricing" class="btn btn-outline" style="padding:9px 18px;font-size:13px">
+        <span class="ar">الأسعار</span><span class="fr">Tarifs</span>
+      </a>
+      <a href="https://wa.me/213558088314?text=مرحبا%20أريد%20تطبيق%20محلي" target="_blank" class="btn btn-gold" style="padding:9px 18px;font-size:13px">
+        <span class="ar">اطلب الآن</span><span class="fr">Commander</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div style="margin-bottom:20px">
+      <span class="badge badge-green"><span class="glow-dot"></span>
+        <span class="ar">متاح الآن على Android</span>
+        <span class="fr">Disponible sur Android</span>
+      </span>
+    </div>
+    <h1>
+      <span class="ar">إدارة متجرك<br/><span class="grad-text">بذكاء تجاري حقيقي</span></span>
+      <span class="fr">Gérez votre commerce<br/><span class="grad-text">avec intelligence</span></span>
+    </h1>
+    <p class="hero-sub">
+      <span class="ar">تطبيق Android احترافي يُمكّن التاجر الجزائري من إدارة مبيعاته ومخزونه وأرباحه بالكامل من هاتفه — بدون إنترنت، بدون خوادم، بدون قيود.</span>
+      <span class="fr">Application Android professionnelle qui permet au commerçant algérien de gérer ses ventes, stocks et bénéfices depuis son téléphone — sans internet, sans serveur, sans limites.</span>
+    </p>
+    <div class="hero-btns">
+      <a href="https://wa.me/213558088314?text=مرحبا%20أريد%20تطبيق%20محلي%20بسعر%208000%20دج" target="_blank" class="btn btn-wa" style="font-size:17px;padding:15px 36px">
+        💬 <span class="ar">اطلب التطبيق عبر واتساب</span><span class="fr">Commander via WhatsApp</span>
+      </a>
+      <a href="#features" class="btn btn-outline" style="font-size:17px;padding:15px 28px">
+        <span class="ar">اكتشف المميزات</span><span class="fr">Découvrir les fonctionnalités</span>
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num grad-text">100%</div>
+        <div class="lbl"><span class="ar">بيانات محلية على جهازك</span><span class="fr">Données locales</span></div>
+      </div>
+      <div class="hero-stat">
+        <div class="num grad-text">0 DZD</div>
+        <div class="lbl"><span class="ar">Pro مجاني لسنة كاملة</span><span class="fr">Pro gratuit 1 an</span></div>
+      </div>
+      <div class="hero-stat">
+        <div class="num grad-text">∞</div>
+        <div class="lbl"><span class="ar">منتجات وفواتير مع Pro</span><span class="fr">Produits & factures illimités</span></div>
+      </div>
+      <div class="hero-stat">
+        <div class="num grad-text">8,000 DZD</div>
+        <div class="lbl"><span class="ar">دفعة واحدة فقط</span><span class="fr">Paiement unique</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="line-sep"></div>
+
+<section class="screenshots-section" id="screenshots">
+  <div class="container">
+    <div class="sh">
+      <div class="badge badge-blue" style="margin-bottom:14px">
+        📱 <span class="ar">داخل التطبيق</span><span class="fr">Aperçu de l'application</span>
+      </div>
+      <h2>
+        <span class="ar">شاهد التطبيق <span class="grad-text">بنفسك</span></span>
+        <span class="fr">Voyez l'application <span class="grad-text">par vous-même</span></span>
+      </h2>
+      <p>
+        <span class="ar">واجهة سهلة وعصرية — تحكّم كامل بتجارتك من هاتفك</span>
+        <span class="fr">Interface intuitive et moderne — contrôle total depuis votre téléphone</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="screenshots-scroll">
+
+    <div class="ss-item scroll-anim">
+      <div class="ss-phone">
+        <img src="screenshots/screen1.jpg" alt="لوحة التحكم" loading="lazy" />
+      </div>
+      <div class="ss-label">
+        <span class="ar">الرئيسية</span><span class="fr">Accueil</span>
+      </div>
+    </div>
+
+    <div class="ss-item scroll-anim">
+      <div class="ss-phone">
+        <img src="screenshots/screen2.jpg" alt="الوضع الداكن" loading="lazy" />
+      </div>
+      <div class="ss-label">
+        <span class="ar">الوضع الداكن</span><span class="fr">Mode sombre</span>
+      </div>
+    </div>
+
+    <div class="ss-item scroll-anim">
+      <div class="ss-phone">
+        <img src="screenshots/screen3.jpg" alt="تنبيهات" loading="lazy" />
+      </div>
+      <div class="ss-label">
+        <span class="ar">تنبيهات ذكية</span><span class="fr">Alertes intelligentes</span>
+      </div>
+    </div>
+
+    <div class="ss-item scroll-anim">
+      <div class="ss-phone">
+        <img src="screenshots/screen4.jpg" alt="المخزون" loading="lazy" />
+      </div>
+      <div class="ss-label">
+        <span class="ar">إدارة المخزون</span><span class="fr">Gestion des stocks</span>
+      </div>
+    </div>
+
+    <div class="ss-item scroll-anim">
+      <div class="ss-phone">
+        <img src="screenshots/screen5.jpg" alt="تحليلات ذكية" loading="lazy" />
+      </div>
+      <div class="ss-label">
+        <span class="ar">تحليلات ذكية</span><span class="fr">Analyses intelligentes</span>
+      </div>
+    </div>
+
+    <div class="ss-item scroll-anim">
+      <div class="ss-phone">
+        <img src="screenshots/screen6.jpg" alt="التقارير" loading="lazy" />
+      </div>
+      <div class="ss-label">
+        <span class="ar">التقارير والتحليلات</span><span class="fr">Rapports & analyses</span>
+      </div>
+    </div>
+
+    <div class="ss-item scroll-anim">
+      <div class="ss-phone">
+        <img src="screenshots/screen7.jpg" alt="ربحية المنتجات" loading="lazy" />
+      </div>
+      <div class="ss-label">
+        <span class="ar">ربحية المنتجات</span><span class="fr">Rentabilité des produits</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="line-sep"></div>
+
+<section class="section" id="features">
+  <div class="container">
+    <div class="sh">
+      <div class="badge badge-gold" style="margin-bottom:16px">✦ <span class="ar">المميزات الرئيسية</span><span class="fr">Fonctionnalités clés</span></div>
+      <h2><span class="ar">كل ما يحتاجه <span class="grad-text">التاجر الذكي</span></span><span class="fr">Tout ce dont le commerçant <span class="grad-text">a besoin</span></span></h2>
+      <p><span class="ar">من نقطة البيع إلى التقارير الشهرية — كل شيء في تطبيق واحد</span><span class="fr">Du point de vente aux rapports mensuels — tout dans une seule application</span></p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">🛒</div><h3><span class="ar">نقطة بيع سريعة (POS)</span><span class="fr">Caisse rapide (POS)</span></h3><p><span class="ar">أتمّ عملية البيع في ثوانٍ — ماسح باركود، إيصالات فورية، وطباعة لاسلكية عبر Bluetooth.</span><span class="fr">Finalisez une vente en secondes — scanner code-barres, reçus instantanés, impression Bluetooth.</span></p></div>
+      <div class="feature-card"><div class="feature-icon">📦</div><h3><span class="ar">إدارة المخزون</span><span class="fr">Gestion des stocks</span></h3><p><span class="ar">تتبّع كميات المنتجات لحظة بلحظة، تنبيهات عند نفاد المخزون، وتاريخ كامل لكل حركة.</span><span class="fr">Suivez vos stocks en temps réel, alertes de rupture, historique complet de chaque mouvement.</span></p></div>
+      <div class="feature-card"><div class="feature-icon">🧾</div><h3><span class="ar">فواتير احترافية PDF</span><span class="fr">Factures professionnelles PDF</span></h3><p><span class="ar">أنشئ فواتير مرقّمة باسم متجرك وشعاره، وشاركها أو احفظها في لحظة.</span><span class="fr">Créez des factures numérotées avec le nom et logo de votre commerce, partagez-les instantanément.</span></p></div>
+      <div class="feature-card"><div class="feature-icon">📊</div><h3><span class="ar">تقارير وتحليلات ذكية</span><span class="fr">Rapports & analyses intelligentes</span></h3><p><span class="ar">اعرف أرباحك الحقيقية يومياً وشهرياً، وقارن الفترات، واكتشف أفضل منتجاتك أداءً.</span><span class="fr">Analysez vos bénéfices réels, comparez les périodes, identifiez vos meilleures ventes.</span></p></div>
+      <div class="feature-card"><div class="feature-icon">💳</div><h3><span class="ar">إدارة الدّين والدائنين</span><span class="fr">Gestion des crédits</span></h3><p><span class="ar">سجّل ديون الزبائن والموردين بدقة، مع تتبّع حالة كل دين ومواعيد التسديد.</span><span class="fr">Enregistrez les dettes clients/fournisseurs avec suivi des échéances de remboursement.</span></p></div>
+      <div class="feature-card"><div class="feature-icon">🏭</div><h3><span class="ar">إدارة الموردين</span><span class="fr">Gestion des fournisseurs</span></h3><p><span class="ar">تاريخ كامل مع كل مورد، فواتير الشراء، وربحية كل منتج بعد خصم تكاليف الاستيراد.</span><span class="fr">Historique complet par fournisseur, factures d'achat, rentabilité nette par produit.</span></p></div>
+      <div class="feature-card"><div class="feature-icon">🔔</div><h3><span class="ar">تنبيهات ذكية فورية</span><span class="fr">Alertes intelligentes</span></h3><p><span class="ar">يُنبّهك التطبيق تلقائياً عند نفاد مخزون، ديون متأخرة، أو تراجع في المبيعات.</span><span class="fr">Alertes automatiques pour rupture de stock, dettes en retard, ou baisse des ventes.</span></p></div>
+      <div class="feature-card"><div class="feature-icon">👥</div><h3><span class="ar">قاعدة بيانات الزبائن</span><span class="fr">Base de données clients</span></h3><p><span class="ar">احتفظ بمعلومات زبائنك، تاريخ مشترياتهم، وديونهم في مكان واحد منظّم.</span><span class="fr">Conservez les informations clients, historique d'achats et dettes en un seul endroit.</span></p></div>
+      <div class="feature-card"><div class="feature-icon">🔒</div><h3><span class="ar">خصوصية تامة — بدون إنترنت</span><span class="fr">100% privé — hors ligne</span></h3><p><span class="ar">جميع بياناتك محفوظة على جهازك فقط. لا خوادم، لا مخاطر، لا اشتراك سحابي إجباري.</span><span class="fr">Toutes vos données restent sur votre appareil. Pas de serveur, pas de cloud obligatoire.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<div class="line-sep"></div>
+
+<section class="updates-section" id="updates">
+  <div class="container">
+    <div class="updates-inner">
+      <div class="updates-left">
+        <div class="badge badge-purple" style="margin-bottom:20px">🚀 <span class="ar">تطوير مستمر</span><span class="fr">Développement continu</span></div>
+        <h2><span class="ar">التطبيق ينمو <span class="grad-text">معك</span></span><span class="fr">L'application évolue <span class="grad-text">avec vous</span></span></h2>
+        <p><span class="ar">لا يتوقف محلي عند هذا الحد — فريق THRONE يعمل باستمرار على إضافة ميزات جديدة وتحسين التجربة مع كل إصدار. كل من يمتلك التطبيق يحصل على التحديثات مجاناً.</span><span class="fr">Ma7ali ne s'arrête pas là — l'équipe THRONE travaille en permanence pour ajouter de nouvelles fonctionnalités. Chaque propriétaire de l'application reçoit les mises à jour gratuitement.</span></p>
+        <div class="update-list">
+          <div class="update-item"><div class="ui-icon">🔄</div><div><h4><span class="ar">تحديثات مجانية للأبد</span><span class="fr">Mises à jour gratuites à vie</span></h4><p><span class="ar">ادفع مرة واحدة واستقبل كل الإصدارات القادمة بدون أي تكلفة إضافية.</span><span class="fr">Payez une fois et recevez toutes les futures versions sans frais supplémentaires.</span></p></div></div>
+          <div class="update-item"><div class="ui-icon">💡</div><div><h4><span class="ar">ميزات بناءً على طلباتك</span><span class="fr">Fonctionnalités selon vos besoins</span></h4><p><span class="ar">تقترح ونُنفّذ — طلبات المستخدمين هي أولويتنا في كل إصدار جديد.</span><span class="fr">Vous suggérez, nous réalisons — les demandes des utilisateurs sont notre priorité.</span></p></div></div>
+          <div class="update-item"><div class="ui-icon">🛡️</div><div><h4><span class="ar">إصلاح فوري للمشاكل</span><span class="fr">Corrections rapides</span></h4><p><span class="ar">أي مشكلة تُبلّغ عنها تُصلح في أقرب وقت ممكن مع دعم مباشر عبر واتساب.</span><span class="fr">Tout problème signalé est corrigé rapidement avec support direct via WhatsApp.</span></p></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="roadmap-card">
+          <h3>🗺 <span class="ar">خارطة طريق المميزات</span><span class="fr">Feuille de route</span></h3>
+          <div class="roadmap-item"><div class="roadmap-dot"><div class="rdot done"></div></div><div class="roadmap-text"><h4><span class="ar">✓ نقطة البيع + الباركود</span><span class="fr">✓ Caisse + code-barres</span></h4><p><span class="ar">متوفر في الإصدار الحالي</span><span class="fr">Disponible maintenant</span></p></div></div>
+          <div class="roadmap-item"><div class="roadmap-dot"><div class="rdot done"></div></div><div class="roadmap-text"><h4><span class="ar">✓ التقارير والتحليلات</span><span class="fr">✓ Rapports et analyses</span></h4><p><span class="ar">متوفر في الإصدار الحالي</span><span class="fr">Disponible maintenant</span></p></div></div>
+          <div class="roadmap-item"><div class="roadmap-dot"><div class="rdot done"></div></div><div class="roadmap-text"><h4><span class="ar">✓ طباعة Bluetooth</span><span class="fr">✓ Impression Bluetooth</span></h4><p><span class="ar">متوفر في الإصدار الحالي</span><span class="fr">Disponible maintenant</span></p></div></div>
+          <div class="roadmap-item"><div class="roadmap-dot"><div class="rdot soon"></div></div><div class="roadmap-text"><h4><span class="ar">⏳ نسخ احتياطي تلقائي</span><span class="fr">⏳ Sauvegarde automatique</span></h4><p><span class="ar">قريباً — الإصدار 1.1</span><span class="fr">Bientôt — Version 1.1</span></p></div></div>
+          <div class="roadmap-item"><div class="roadmap-dot"><div class="rdot soon"></div></div><div class="roadmap-text"><h4><span class="ar">⏳ ماسح QR للزبائن</span><span class="fr">⏳ Scanner QR clients</span></h4><p><span class="ar">قريباً — الإصدار 1.1</span><span class="fr">Bientôt — Version 1.1</span></p></div></div>
+          <div class="roadmap-item"><div class="roadmap-dot"><div class="rdot planned"></div></div><div class="roadmap-text"><h4><span class="ar">○ نسخة iOS (iPhone)</span><span class="fr">○ Version iOS (iPhone)</span></h4><p><span class="ar">مخطط — الإصدار 2.0</span><span class="fr">Planifié — Version 2.0</span></p></div></div>
+          <div class="roadmap-item"><div class="roadmap-dot"><div class="rdot planned"></div></div><div class="roadmap-text"><h4><span class="ar">○ متعدد المستخدمين</span><span class="fr">○ Multi-utilisateurs</span></h4><p><span class="ar">مخطط — الإصدار 2.0</span><span class="fr">Planifié — Version 2.0</span></p></div></div>
+          <div class="rdot-legend">
+            <span><div class="rdot done" style="display:inline-block;width:8px;height:8px"></div> <span class="ar">متوفر</span><span class="fr">Disponible</span></span>
+            <span><div class="rdot soon" style="display:inline-block;width:8px;height:8px"></div> <span class="ar">قريباً</span><span class="fr">Bientôt</span></span>
+            <span><div class="rdot planned" style="display:inline-block;width:8px;height:8px"></div> <span class="ar">مخطط</span><span class="fr">Planifié</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="line-sep"></div>
+
+<section class="section" style="background:var(--bg2)">
+  <div class="container">
+    <div class="sh">
+      <div class="badge badge-blue" style="margin-bottom:16px">⚡ <span class="ar">كيف يعمل؟</span><span class="fr">Comment ça marche ?</span></div>
+      <h2><span class="ar">ابدأ في <span class="grad-text-blue">أقل من دقيقة</span></span><span class="fr">Démarrez en <span class="grad-text-blue">moins d'une minute</span></span></h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3><span class="ar">ثبّت التطبيق</span><span class="fr">Installez l'application</span></h3><p><span class="ar">تلقّى ملف APK عبر واتساب وثبّته على هاتفك مباشرة — بدون Play Store.</span><span class="fr">Recevez le fichier APK via WhatsApp et installez-le directement — sans Play Store.</span></p></div>
+      <div class="step"><div class="step-num">2</div><h3><span class="ar">أدخل بيانات متجرك</span><span class="fr">Configurez votre commerce</span></h3><p><span class="ar">اسم المتجر، الشعار، معلومات التواصل — تظهر تلقائياً على كل الفواتير.</span><span class="fr">Nom, logo, coordonnées — s'affichent automatiquement sur toutes vos factures.</span></p></div>
+      <div class="step"><div class="step-num">3</div><h3><span class="ar">أضف منتجاتك</span><span class="fr">Ajoutez vos produits</span></h3><p><span class="ar">أسعار الشراء والبيع، الكميات، والباركود — في ثوانٍ لكل منتج.</span><span class="fr">Prix d'achat et de vente, quantités, code-barres — en quelques secondes par produit.</span></p></div>
+      <div class="step"><div class="step-num">4</div><h3><span class="ar">ابدأ البيع واتّبع الأرباح</span><span class="fr">Vendez et suivez vos bénéfices</span></h3><p><span class="ar">سجّل مبيعاتك يومياً وتابع التقارير لحظة بلحظة. يعمل حتى بدون إنترنت.</span><span class="fr">Enregistrez vos ventes quotidiennes. Rapports en temps réel. Fonctionne hors ligne.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<div class="line-sep"></div>
+
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="sh">
+      <div class="badge badge-gold" style="margin-bottom:16px">💎 <span class="ar">الأسعار</span><span class="fr">Tarifs</span></div>
+      <h2><span class="ar">سعر واضح <span class="grad-text">بدون مفاجآت</span></span><span class="fr">Prix transparent <span class="grad-text">sans surprises</span></span></h2>
+      <p><span class="ar">دفعة واحدة للتطبيق — وتستمتع بـ Pro مجاناً لسنة كاملة</span><span class="fr">Un seul paiement — Pro gratuit pendant 1 an complet</span></p>
+    </div>
+    <div class="pricing-app">
+      <div class="badge badge-gold" style="margin-bottom:12px"><span class="ar">التطبيق الأساسي</span><span class="fr">Application de base</span></div>
+      <h2><span class="ar">تطبيق محلي — Ma7ali</span><span class="fr">Application Ma7ali</span></h2>
+      <div class="price-badge">8,000 <span>DZD</span></div>
+      <p class="sub"><span class="ar">دفعة واحدة · ملكيتك للأبد</span><span class="fr">Paiement unique · Votre propriété à vie</span></p>
+      <ul class="included-list">
+        <li><span class="star">★</span><span class="ar"><strong>سنة كاملة من Pro مجاناً</strong> عند الشراء</span><span class="fr"><strong>1 an de Pro offert</strong> à l'achat</span></li>
+        <li><span class="check">✔</span><span class="ar">جميع ميزات التطبيق بدون قيود</span><span class="fr">Toutes les fonctionnalités sans limites</span></li>
+        <li><span class="check">✔</span><span class="ar">تحديثات مستقبلية مجانية</span><span class="fr">Mises à jour futures gratuites</span></li>
+        <li><span class="check">✔</span><span class="ar">دعم مباشر عبر واتساب</span><span class="fr">Support direct via WhatsApp</span></li>
+        <li><span class="check">✔</span><span class="ar">تسليم فوري بعد الدفع</span><span class="fr">Livraison immédiate après paiement</span></li>
+      </ul>
+      <a href="https://wa.me/213558088314?text=مرحبا%20أريد%20شراء%20تطبيق%20محلي%20بسعر%208000%20دج" target="_blank" class="btn btn-wa" style="font-size:16px;padding:15px 36px">
+        💬 <span class="ar">اطلب الآن عبر واتساب</span><span class="fr">Commander via WhatsApp</span>
+      </a>
+      <div class="after-note">
+        <strong style="color:var(--text)"><span class="ar">بعد انتهاء السنة المجانية:</span><span class="fr">Après l'année gratuite :</span></strong>
+        <span class="ar">يبقى التطبيق عندك بكامل ميزاته الأساسية للأبد. إذا أردت الاستمرار في ميزات Pro — تختار الاشتراك المناسب أدناه. لا إلزام، لا تجديد تلقائي.</span>
+        <span class="fr">L'application reste à vous avec toutes ses fonctionnalités de base. Pour continuer avec Pro — choisissez l'abonnement ci-dessous. Aucune obligation, aucun renouvellement automatique.</span>
+      </div>
+    </div>
+
+    <div class="sh" style="margin-bottom:32px">
+      <div class="badge badge-blue" style="margin-bottom:12px">🔄 <span class="ar">اشتراكات Pro — بعد السنة المجانية</span><span class="fr">Abonnements Pro — après l'année gratuite</span></div>
+      <h2 style="font-size:26px"><span class="ar">اختر المدة المناسبة لك</span><span class="fr">Choisissez la durée qui vous convient</span></h2>
+      <p><span class="ar">كل الاشتراكات تُفعَّل بكود يصلك فوراً — بدون دفع تلقائي أبداً</span><span class="fr">Activation par code instantané — jamais de prélèvement automatique</span></p>
+    </div>
+    <div class="plans-grid">
+      <div class="plan-card"><div class="plan-name"><span class="ar">شهر واحد</span><span class="fr">1 mois</span></div><div class="plan-price">1,500</div><div class="plan-dz">DZD</div><div class="plan-note"><span class="ar">للتجربة</span><span class="fr">Pour essayer</span></div></div>
+      <div class="plan-card"><div class="plan-name"><span class="ar">3 أشهر</span><span class="fr">3 mois</span></div><div class="plan-price">3,000</div><div class="plan-dz">DZD</div><div class="plan-note" style="color:var(--green)"><span class="ar">وفّر 1,500 دج</span><span class="fr">Économisez 1 500 DZD</span></div></div>
+      <div class="plan-card"><div class="plan-name"><span class="ar">6 أشهر</span><span class="fr">6 mois</span></div><div class="plan-price">5,000</div><div class="plan-dz">DZD</div><div class="plan-note" style="color:var(--green)"><span class="ar">وفّر 4,000 دج</span><span class="fr">Économisez 4 000 DZD</span></div></div>
+      <div class="plan-card highlight"><div class="plan-name"><span class="ar">سنة كاملة</span><span class="fr">1 an</span></div><div class="plan-price">9,000</div><div class="plan-dz">DZD</div><div class="plan-note" style="color:var(--green)"><span class="ar">الأوفر</span><span class="fr">Meilleur rapport</span></div></div>
+      <div class="plan-card" style="border-color:rgba(244,63,94,.25)"><div class="plan-name" style="color:var(--red)">🔥 <span class="ar">مدى الحياة</span><span class="fr">À vie</span></div><div class="plan-price" style="font-size:22px">12,000</div><div class="plan-dz">DZD</div><div class="plan-note"><span class="ar">دفعة واحدة للأبد</span><span class="fr">Une fois pour toujours</span></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="line-sep"></div>
+
+<section class="section" style="background:var(--bg2)">
+  <div class="container">
+    <div class="sh">
+      <h2><span class="ar">مجاني مقابل <span class="grad-text">Pro</span></span><span class="fr">Gratuit vs <span class="grad-text">Pro</span></span></h2>
+      <p><span class="ar">ابدأ مجاناً واترقِّ عندما تنمو تجارتك</span><span class="fr">Commencez gratuitement, passez Pro quand votre commerce se développe</span></p>
+    </div>
+    <div class="table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="text-align:right"><span class="ar">الميزة</span><span class="fr">Fonctionnalité</span></th>
+            <th class="col-free"><span class="ar">مجاني</span><span class="fr">Gratuit</span></th>
+            <th class="pro-col">✦ Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ar">عدد المنتجات</span><span class="fr">Nombre de produits</span></td><td class="col-free">10</td><td class="col-pro"><span class="ar">غير محدود</span><span class="fr">Illimité</span></td></tr>
+          <tr><td><span class="ar">الفواتير الشهرية</span><span class="fr">Factures / mois</span></td><td class="col-free">50</td><td class="col-pro"><span class="ar">غير محدود</span><span class="fr">Illimité</span></td></tr>
+          <tr><td><span class="ar">الموردون</span><span class="fr">Fournisseurs</span></td><td class="col-free">3</td><td class="col-pro"><span class="ar">غير محدود</span><span class="fr">Illimité</span></td></tr>
+          <tr><td><span class="ar">تحليلات ذكية</span><span class="fr">Analyses intelligentes</span></td><td><span class="ic-no">✗</span></td><td><span class="ic-yes">✔</span></td></tr>
+          <tr><td><span class="ar">تنبيهات ذكية</span><span class="fr">Alertes intelligentes</span></td><td><span class="ic-no">✗</span></td><td><span class="ic-yes">✔</span></td></tr>
+          <tr><td><span class="ar">ربحية كل منتج</span><span class="fr">Rentabilité par produit</span></td><td><span class="ic-no">✗</span></td><td><span class="ic-yes">✔</span></td></tr>
+          <tr><td><span class="ar">مقارنة الفترات</span><span class="fr">Comparaison de périodes</span></td><td><span class="ic-no">✗</span></td><td><span class="ic-yes">✔</span></td></tr>
+          <tr><td><span class="ar">تصدير CSV</span><span class="fr">Export CSV</span></td><td><span class="ic-no">✗</span></td><td><span class="ic-yes">✔</span></td></tr>
+          <tr><td><span class="ar">ملخص مالي PDF</span><span class="fr">Résumé financier PDF</span></td><td><span class="ic-no">✗</span></td><td><span class="ic-yes">✔</span></td></tr>
+          <tr><td><span class="ar">تحديثات مستقبلية</span><span class="fr">Mises à jour futures</span></td><td><span class="ic-yes">✔</span></td><td><span class="ic-yes">✔</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="line-sep"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="sh">
+      <div class="badge badge-blue" style="margin-bottom:16px">❓ <span class="ar">الأسئلة الشائعة</span><span class="fr">Questions fréquentes</span></div>
+      <h2><span class="ar">كل ما تريد <span class="grad-text">معرفته</span></span><span class="fr">Tout ce que vous voulez <span class="grad-text">savoir</span></span></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span><span class="ar">هل التطبيق يعمل بدون إنترنت؟</span><span class="fr">L'application fonctionne-t-elle sans internet ?</span></span><span class="arrow">▾</span></div><div class="faq-a"><span class="ar">نعم، كل بيانات التطبيق محفوظة محلياً على جهازك. لا تحتاج إنترنت لتشغيل التطبيق أو إدارة مبيعاتك يومياً.</span><span class="fr">Oui, toutes les données sont stockées localement sur votre appareil. Aucune connexion internet n'est nécessaire pour utiliser l'application au quotidien.</span></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span><span class="ar">كيف يتم تسليم التطبيق؟</span><span class="fr">Comment l'application est-elle livrée ?</span></span><span class="arrow">▾</span></div><div class="faq-a"><span class="ar">بعد إتمام الدفع، يُرسَل إليك ملف APK مباشرة عبر واتساب. تثبّته على هاتفك في دقيقة واحدة بدون الحاجة لـ Play Store.</span><span class="fr">Après le paiement, le fichier APK vous est envoyé directement via WhatsApp. Installez-le en une minute sans besoin du Play Store.</span></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span><span class="ar">هل يعمل على كل هواتف Android؟</span><span class="fr">Fonctionne-t-il sur tous les Android ?</span></span><span class="arrow">▾</span></div><div class="faq-a"><span class="ar">يعمل على أي هاتف Android نسخة 7.0 أو أحدث. لا يعمل على iPhone في الوقت الحالي — نسخة iOS قيد التطوير.</span><span class="fr">Fonctionne sur tout Android 7.0 ou supérieur. Pas disponible sur iPhone pour l'instant — version iOS en développement.</span></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span><span class="ar">ماذا يحدث بعد انتهاء سنة Pro المجانية؟</span><span class="fr">Que se passe-t-il après l'année Pro gratuite ?</span></span><span class="arrow">▾</span></div><div class="faq-a"><span class="ar">يبقى التطبيق عندك بالكامل للأبد — فقط تُغلَق ميزات Pro الإضافية. تستطيع تجديدها يدوياً متى أردت بكود تحصل عليه عبر واتساب. لا تجديد تلقائي، ولا رسوم خفية.</span><span class="fr">L'application reste à vous pour toujours — seules les fonctionnalités Pro sont désactivées. Renouvellement manuel via code WhatsApp. Aucun prélèvement automatique, aucuns frais cachés.</span></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span><span class="ar">هل سيكون هناك تحديثات جديدة؟</span><span class="fr">Y aura-t-il de nouvelles mises à jour ?</span></span><span class="arrow">▾</span></div><div class="faq-a"><span class="ar">نعم، التطبيق يتطور باستمرار. كل من اشترى التطبيق يتلقى التحديثات مجاناً عبر واتساب. نعمل على إضافة ميزات جديدة بانتظام بناءً على احتياجات المستخدمين.</span><span class="fr">Oui, l'application évolue continuellement. Chaque acheteur reçoit les mises à jour gratuitement via WhatsApp. Nous ajoutons régulièrement de nouvelles fonctionnalités selon les besoins des utilisateurs.</span></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span><span class="ar">هل البيانات آمنة؟</span><span class="fr">Mes données sont-elles en sécurité ?</span></span><span class="arrow">▾</span></div><div class="faq-a"><span class="ar">نعم تماماً. كل بياناتك مخزّنة داخل جهازك فقط ولا تُرسَل لأي خادم خارجي. أنت وحدك من تملك بيانات متجرك.</span><span class="fr">Absolument. Toutes vos données sont stockées uniquement sur votre appareil et ne sont jamais envoyées vers un serveur externe.</span></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span><span class="ar">هل يدعم طابعة الإيصالات؟</span><span class="fr">Supporte-t-il les imprimantes à reçus ?</span></span><span class="arrow">▾</span></div><div class="faq-a"><span class="ar">نعم، يدعم الطابعات الحرارية (80mm) عبر Bluetooth مباشرة من الهاتف. يمكن كذلك حفظ الفواتير كملفات PDF.</span><span class="fr">Oui, compatibilité avec les imprimantes thermiques (80mm) via Bluetooth directement depuis le téléphone. Sauvegarde en PDF également disponible.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="line-sep"></div>
+
+<section class="cta-section">
+  <div style="position:relative;z-index:1">
+    <div class="badge badge-green" style="margin-bottom:24px">
+      <span class="glow-dot"></span>
+      <span class="ar">متاح الآن — تسليم فوري</span><span class="fr">Disponible maintenant — livraison immédiate</span>
+    </div>
+    <h2><span class="ar">جاهز تبدأ <span class="grad-text">تجارتك الذكية؟</span></span><span class="fr">Prêt à gérer votre commerce <span class="grad-text">intelligemment ?</span></span></h2>
+    <p><span class="ar">8,000 دج فقط — وتحصل على التطبيق كاملاً مع Pro مجاناً لسنة كاملة</span><span class="fr">8 000 DZD seulement — application complète avec Pro gratuit pendant 1 an</span></p>
+    <a href="https://wa.me/213558088314?text=مرحبا%20أريد%20شراء%20تطبيق%20محلي%20Ma7ali%20بسعر%208000%20دج" target="_blank" class="btn btn-wa" style="font-size:19px;padding:18px 48px">
+      💬 <span class="ar">اطلب الآن عبر واتساب</span><span class="fr">Commander via WhatsApp</span>
+    </a>
+    <p style="margin-top:20px;font-size:13px;color:var(--muted)">+213 55 808 8314 &nbsp;·&nbsp; <span class="ar">متاح يومياً</span><span class="fr">Disponible tous les jours</span></p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-logo grad-text">محلي · Ma7ali</div>
+    <div class="links">
+      <a href="#features"><span class="ar">المميزات</span><span class="fr">Fonctionnalités</span></a>
+      <a href="#updates"><span class="ar">التحديثات</span><span class="fr">Mises à jour</span></a>
+      <a href="#pricing"><span class="ar">الأسعار</span><span class="fr">Tarifs</span></a>
+      <a href="https://wa.me/213558088314" target="_blank">WhatsApp</a>
+    </div>
+    <p>© 2026 THRONE · <span class="ar">جميع الحقوق محفوظة</span><span class="fr">Tous droits réservés</span></p>
+    <p style="margin-top:6px;font-size:12px;color:var(--muted)"><span class="ar">جميع البيانات محفوظة محلياً · لا خوادم · لا تجديد تلقائي</span><span class="fr">Données stockées localement · Pas de serveur · Pas de renouvellement automatique</span></p>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.getElementById('btn-ar').className = 'btn-lang' + (lang==='ar'?' active':'');
+    document.getElementById('btn-fr').className = 'btn-lang' + (lang==='fr'?' active':'');
+    localStorage.setItem('ma7ali-lang', lang);
+  }
+  const saved = localStorage.getItem('ma7ali-lang');
+  if (saved) setLang(saved);
+
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.feature-card,.step,.plan-card,.update-item,.roadmap-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(28px)';
+    el.style.transition = 'opacity .55s ease, transform .55s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
